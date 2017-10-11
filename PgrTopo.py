@@ -15,7 +15,6 @@ class PgrTopo( Topo ):
         Topo.__init__( self )
 
         # Add hosts
-        PC0 = self.addHost('PC0')
         PC1 = self.addHost('PC1')
         PC2 = self.addHost('PC2')
         PC3 = self.addHost('PC3')
@@ -34,57 +33,75 @@ class PgrTopo( Topo ):
         PC16 = self.addHost('PC16')
         PC17 = self.addHost('PC17')
         PC18 = self.addHost('PC18')
-        PC19 = self.addHost('PC19')
-        PC20 = self.addHost('PC20')
-        PC21 = self.addHost('PC21')
 
         # Add servers
 
-        Server0 = self.addHost('Server0')
-        Server1 = self.addHost('Server1')
+        Investigacion = self.addHost('Investigacion')
+        Desarrollo = self.addHost('Desarrollo')
+        Pruebas = self.addHost('Pruebas')
         
         # Add switches
-        Switch0 = self.addSwitch('Switch0')
-        Switch1 = self.addSwitch('Switch1')
-        Switch2 = self.addSwitch('Switch2')
-        Switch3 = self.addSwitch('Switch3')
-        Switch4 = self.addSwitch('Switch4')
-        
+
+        Core1 = self.addSwitch('Core1')
+        Core2 = self.addSwitch('Core2')
+
+        Distribution1 = self.addSwitch('Distribution1')
+        Distribution2 = self.addSwitch('Distribution2')
+        Distribution3 = self.addSwitch('Distribution3')
+        Distribution4 = self.addSwitch('Distribution4')
+
+        Access1 = self.addSwitch('Access1')
+        Access2 = self.addSwitch('Access2')
+        Access3 = self.addSwitch('Access3')
+        Access4 = self.addSwitch('Access4')
+
         # Add links
         ##Between Switchs
-        self.addLink(Switch1,Swicth0)
-        self.addLink(Switch2,Swicth0)
-        self.addLink(Switch4,Swicth1)
-        self.addLink(Switch3,Swicth2)
+
+        self.addLink(Core1,Core2)
+
+        self.addLink(Core1,Distribution1)
+        self.addLink(Core1,Distribution2)
+        self.addLink(Core1,Distribution3)
+        self.addLink(Core1,Distribution4)
+
+        self.addLink(Core2,Distribution1)
+        self.addLink(Core2,Distribution2)
+        self.addLink(Core2,Distribution3)
+        self.addLink(Core2,Distribution4)
+
+        self.addLink(Distribution1,Access1)
+        self.addLink(Distribution2,Access2)
+        self.addLink(Distribution3,Access3)
+        self.addLink(Distribution4,Access4)
+
         ##Between Switch-Server
-        self.addLink(Server0,Swicth1)
-        self.addLink(Server1,Swicth2)
+
+        self.addLink(Access4,Investigacion)
+        self.addLink(Access4,Desarrollo)
+        self.addLink(Access4,Pruebas)
+
         ##Between Switch-Host
-        ###Switch1
-        self.addLink(PC0,Swicth1)
-        self.addLink(PC1,Swicth1)
-        self.addLink(PC2,Swicth1)
-        self.addLink(PC3,Swicth1)
-        self.addLink(PC4,Swicth1)
-        self.addLink(PC5,Swicth1)
-        self.addLink(PC6,Swicth1)
-        self.addLink(PC7,Swicth1)
-        self.addLink(PC8,Swicth1)
-        ###Switch2
-        self.addLink(PC9,Swicth2)
-        self.addLink(PC10,Swicth2)
-        self.addLink(PC11,Swicth2)
-        self.addLink(PC12,Swicth2)
-        self.addLink(PC13,Swicth2)
-        self.addLink(PC14,Swicth2)
-        self.addLink(PC15,Swicth2)
-        self.addLink(PC16,Swicth2)
-        self.addLink(PC17,Swicth2)
-        ###Switch3
-        self.addLink(PC18,Swicth3)
-        self.addLink(PC19,Swicth3)
-        ###Switch4
-        self.addLink(PC20,Swicth4)
-        self.addLink(PC21,Swicth4)
+
+        self.addLink(Access1,PC1)
+        self.addLink(Access1,PC2)
+        self.addLink(Access1,PC3)
+        self.addLink(Access1,PC4)
+        self.addLink(Access1,PC5)
+        self.addLink(Access1,PC6)
+
+        self.addLink(Access2,PC7)
+        self.addLink(Access2,PC8)
+        self.addLink(Access2,PC9)
+        self.addLink(Access2,PC10)
+        self.addLink(Access2,PC11)
+        self.addLink(Access2,PC12)
+
+        self.addLink(Access3,PC13)
+        self.addLink(Access3,PC14)
+        self.addLink(Access3,PC15)
+        self.addLink(Access3,PC16)
+        self.addLink(Access3,PC17)
+        self.addLink(Access3,PC18)
 
 topos = { 'PgrTopo': ( lambda: PgrTopo() ) }
